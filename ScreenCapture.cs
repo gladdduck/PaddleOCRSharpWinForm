@@ -132,7 +132,7 @@
                 Point desPoint = new Point(scrPoint.X - MinX, scrPoint.Y - MinY);
                 gg.CopyFromScreen(scrPoint, desPoint, screen.Bounds.Size);
             }
-            orginScreenImage.Save("d:\\全屏.png");
+            //orginScreenImage.Save("d:\\全屏.png");
             this.Visible = true;
             //设置窗体为正常状态(不能设置为最大化,否则只会占据一个窗体)
             this.WindowState = FormWindowState.Normal;
@@ -184,7 +184,7 @@
                 {
                     //将选中的区域从orginScreenImage保存到part
                     var part = orginScreenImage.Clone(region, System.Drawing.Imaging.PixelFormat.Undefined);
-                    part.Save("d:\\截图.png");
+                    //part.Save("d:\\截图.png");
                     //记录选中的区域,窗体关闭的时候返回
                     if (_isSelectedRegion)
                     {
