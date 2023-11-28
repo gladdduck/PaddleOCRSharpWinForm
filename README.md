@@ -11,10 +11,12 @@ git clone https://github.com/gladdduck/PaddleOCRSharpWinForm.git
 
 #### 1.2. 下载模型
 找到[PaddleOCRSharp项目](https://github.com/raoyutian/PaddleOCRSharp),把仓库中的`PaddleOCRSharp/PaddleOCRLib`文件夹下载下来,放到项目中
+
 ![](https://image.yayan.xyz/20231128092811.png)
 
 #### 1.3 添加dll依赖
 将`OCRDependence`文件夹中的对应版本的dll文件添加到项目依赖中
+
 ![](https://image.yayan.xyz/20231128092939.png)
 
 
