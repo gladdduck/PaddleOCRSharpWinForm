@@ -24,6 +24,13 @@ namespace PaddldOCRTest2
             ocrEngine = new PaddleOCREngine(ocrConfig, ocrParameter);
         }
 
+        private async Task<bool> FormMinimized()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            await Task.Delay(200);
+            return true;
+        }
+
         private ResultDto<string> PaddleOCRTransfer(Bitmap screenImage)
         {
             if (screenImage == null)
@@ -54,7 +61,8 @@ namespace PaddldOCRTest2
 
         private async void ManualSelectClick(object sender, EventArgs e)
         {
-           
+            await FormMinimized();
+
             Bitmap? bitmap;
             ScreenCapture screencapture = new ScreenCapture(autoRegion: false, screenSelect: false);
             if (screencapture.ShowDialog() == DialogResult.OK)
@@ -77,8 +85,10 @@ namespace PaddldOCRTest2
             }
         }
 
-        private void SelectRegionClick(object sender, EventArgs e)
+        private async void SelectRegionClick(object sender, EventArgs e)
         {
+            await FormMinimized();
+
             ScreenCapture screencapture = new ScreenCapture(autoRegion: false, screenSelect: true);
             if (screencapture.ShowDialog() == DialogResult.OK)
             {
@@ -88,13 +98,14 @@ namespace PaddldOCRTest2
             }
         }
 
-        private void AutoSelectClick(object sender, EventArgs e)
+        private async void AutoSelectClick(object sender, EventArgs e)
         {
             if (_autoRegionArea.Width == 0 || _autoRegionArea.Height == 0)
             {
                 MessageBox.Show("请先选择自动截图区域!");
                 return;
             }
+             await FormMinimized();
             Bitmap? bitmap;
             ScreenCapture screencapture = new ScreenCapture(autoRegion: true, screenSelect: false);
             screencapture.SetAutoRegionArea(_autoRegionArea);
@@ -125,13 +136,9 @@ namespace PaddldOCRTest2
             _autoRegionArea = new Rectangle();
             RegionAreaShow.Text = $"";
         }
-        private void HandleMinimizeRequested(object sender, EventArgs e)
-        {
-            // 当收到通知时，执行最小化操作
-            this.WindowState = FormWindowState.Minimized;
-        }
     }
 
+    //识别结果类
     internal class ResultDto<T>
     {
         public bool Success { get; set; }

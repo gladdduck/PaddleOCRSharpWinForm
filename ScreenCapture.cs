@@ -112,13 +112,9 @@
             this.Close();
         }
 
-        public event EventHandler MinimizeRequest;
         //窗体加载监听事件
         private async void CaptureScreenLoad(object sender, EventArgs e)
         {
-
-            //截图窗体加载的时候,触发最小化事件
-            MinimizeRequest.Invoke(this, EventArgs.Empty);
 
             //设置this.Visible = false 的意思是截图的时候不会把窗体截进去
             this.Visible = false;
