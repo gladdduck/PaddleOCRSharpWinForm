@@ -24,11 +24,18 @@ namespace PaddldOCRTest2
             ocrEngine = new PaddleOCREngine(ocrConfig, ocrParameter);
         }
 
-        private async Task<bool> FormMinimized()
+        private async Task FormMinimized()
         {
             this.WindowState = FormWindowState.Minimized;
             await Task.Delay(200);
-            return true;
+            return ;
+        }
+
+        private async Task FormMaximized(bool isMaximized=false)
+        {
+            this.WindowState = isMaximized?FormWindowState.Maximized:FormWindowState.Normal;
+            await Task.Delay(200);
+            return ;
         }
 
         private ResultDto<string> PaddleOCRTransfer(Bitmap screenImage)
@@ -76,13 +83,14 @@ namespace PaddldOCRTest2
                     var ocrMeasureResult = PaddleOCRTransfer(bitmap);
                     if (!ocrMeasureResult.Success)
                     {
+                        await FormMaximized();
                         return;
                     }
                     //添加测量值
                     OCRResult.Text = ocrMeasureResult.Message;
-                    return;
                 }
             }
+            await FormMaximized();
         }
 
         private async void SelectRegionClick(object sender, EventArgs e)
@@ -96,6 +104,7 @@ namespace PaddldOCRTest2
                 _autoRegionArea = screencapture.OutSelectedRegion;
                  RegionAreaShow.Text = $"自动截图区域选择:\n左上角:({_autoRegionArea.X},{_autoRegionArea.Y})\n宽高为:({_autoRegionArea.Width},{_autoRegionArea.Height}).";
             }
+            await FormMaximized();
         }
 
         private async void AutoSelectClick(object sender, EventArgs e)
@@ -120,13 +129,14 @@ namespace PaddldOCRTest2
                     var ocrMeasureResult = PaddleOCRTransfer(bitmap);
                     if (!ocrMeasureResult.Success)
                     {
+                        await FormMaximized();
                         return;
                     }
                     //添加测量值
                     OCRResult.Text = ocrMeasureResult.Message;
-                    return;
                 }
             }
+            await FormMaximized();
         }
 
         private void CleanPanelClick(object sender, EventArgs e)
