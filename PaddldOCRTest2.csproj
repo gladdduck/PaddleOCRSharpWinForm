@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PaddleOCRSharp">
+      <HintPath>..\paddle-ocrsharp\PaddleOCRSharp\bin\x64\Debug\net8.0\PaddleOCRSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PaddleOCRLib\CPU指令集检测工具.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="PaddleOCRLib\PaddleOCR.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net8.0-windows\" />
+  </ItemGroup>
+<Target Name="CopyMyFolder" BeforeTargets="PrepareForBuild">
+  <ItemGroup>
+    <SomeFolder Include="PaddleOCRLib\**" />
+  </ItemGroup>
+  <Copy SourceFiles="@(SomeFolder)" DestinationFiles="$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)" SkipUnchangedFiles="True">
+  </Copy>
+</Target>
+
+</Project>
